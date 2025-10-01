@@ -14,7 +14,7 @@ import os
 from pathlib import Path
 import environ, os
 
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",") if os.environ.get("ALLOWED_HOSTS") else ["*"]
+ALLOWED_HOSTS = ['weatherproject-m36h.onrender.com', 'localhost', '127.0.0.1']
 CSRF_TRUSTED_ORIGINS = []  # we’ll add "https://<your-service>.onrender.com" after deployment
 
 

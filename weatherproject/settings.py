@@ -14,6 +14,9 @@ import os
 from pathlib import Path
 import environ, os
 
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",") if os.environ.get("ALLOWED_HOSTS") else ["*"]
+CSRF_TRUSTED_ORIGINS = []  # we’ll add "https://<your-service>.onrender.com" after deployment
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,6 +30,12 @@ OPENWEATHER_API_KEY = env("OPENWEATHER_API_KEY", default=None)
 GOOGLE_CSE_API_KEY  = env("GOOGLE_CSE_API_KEY", default=None)
 GOOGLE_CSE_ID       = env("GOOGLE_CSE_ID", default=None)
 
+STATIC_URL = "/static/"
+STATIC_ROOT = Path(BASE_DIR) / "staticfiles"
+
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',  # or 'weatherapp/static'
+]
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -36,6 +45,7 @@ SECRET_KEY = 'django-insecure-3(q841abl2+vu=*@%hhf8(v+14^@*38v$dw9)t)dcns(42=%e)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+WHITENOISE_USE_FINDERS = True
 
 ALLOWED_HOSTS = []
 
@@ -53,6 +63,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware"
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

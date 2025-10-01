@@ -15,7 +15,7 @@ from pathlib import Path
 import environ, os
 
 ALLOWED_HOSTS = ['weatherproject-m36h.onrender.com', 'localhost', '127.0.0.1']
-CSRF_TRUSTED_ORIGINS = []  # we’ll add "https://<your-service>.onrender.com" after deployment
+CSRF_TRUSTED_ORIGINS = ['https://weatherproject-m36h.onrender.com']
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
